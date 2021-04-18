@@ -1,0 +1,203 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: row;
+  margin: 100px auto;
+  font-family: 'Press Start 2P', cursive;
+  color: white;
+  background: url(./images/sunsetmando.jpg);
+  background-position: center;
+  background-repeat:no-repeat;
+  background-size: cover;
+}
+
+/* text */
+h1 {
+  margin-bottom: 20px;
+  margin-top: 10px;
+  font-family: 'distant_galaxyregular';
+  font-size: 60px;
+  color: white;
+  background: -webkit-linear-gradient(60deg, rgb(190, 190, 190), #fff, rgb(190, 190, 190));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.intro, h5 {
+  font-size: 10px;
+  font-family: 'Press Start 2P', courier, monospace;
+}
+.instructions li {
+  list-style: square;
+  padding: 2px;
+}
+
+
+/* Layout */
+.main {
+  background-color: rgba(0,0,0,.9);
+  padding: 50px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  margin: 20px;
+  margin-top: 0px;
+}
+.scoreboard-container { 
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 20px auto;
+  font-size: 12px;
+  color: #EFEFEF;
+  width: 500px;
+  background: linear-gradient(45deg, rgb(252, 164, 164), rgb(248, 192, 174));
+  border-radius: 5px;
+}
+.scoreboard { /* NOT ALIGNING TO BOTTOM - WHY?*/
+  display: flex;
+  flex-direction: row;
+}
+.side-container {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+.instructions {
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+  background-color: rgba(0,0,0,.9);
+  color: white;
+  padding: 30px;
+  border-radius: 5px;
+  margin: 10px;
+  margin-top: 0;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+  line-height: 20px;
+}
+.play-container {
+  font-size: 14px;
+  background-color: rgba(0,0,0,.9);
+  color: white;
+  padding: 30px;
+  border-radius: 5px;
+  margin: 10px;
+  margin-top: 0;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Game space */
+.scoreboard {
+  padding: 5px;
+  width: 50%;
+  align-self: flex-end;
+}
+#score-display {
+  
+}
+#lives-display {
+  
+}
+.starfield {
+  display: flex;
+  flex-direction: row;
+  width: 500px;
+  height: 500px;
+  flex-wrap: wrap;
+  margin: 10px auto;
+  font-size: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
+  border: 1px solid white;
+}
+.starfield div {
+  width: 10%;
+  height: 10%;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+/* Images */
+.heart {
+  width: 15%;
+  background-image: url(./images/pixel-heart.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.grogu {
+  background-image: url(./images/grogu.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.the-force {
+  background-image: url(./images/the-force.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.tie-fighter {
+  background-image: url(./images/TIE-fighter.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.dark-side {
+  background-image: url(./images/darkside.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.coin-img { 
+  width: 50px;
+  height: 50px;
+}
+
+/* Buttons */
+button {
+  padding: 10px;
+  margin: 5px;
+  background: rgb(233, 113, 113);
+  border: 1px solid white;
+  color: rgb(255, 255, 255);
+  border-radius: 10px;
+  font-family: 'Press Start 2P', courier, monospace;
+  font-size: 12px;
+  width: 120px;
+}
+button:hover {
+  cursor: pointer;
+  background: rgb(228, 171, 161);
+}
+button:active {
+  transform: translateY(2px) translateX(2px);
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+  outline: none;
+}
+button#insert-coin {
+  background: unset;
+  border: unset;
+  padding: unset;
+  outline: none;
+  width: 50px;
+}
+button#insert-coin:active {
+  box-shadow: unset;
+}
+
+
+@font-face {
+  font-family: 'distant_galaxyregular';
+  src: url('./fonts/DISTGRG_-webfont.eot');
+  src: url('./fonts/DISTGRG_-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
