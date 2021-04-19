@@ -16,8 +16,8 @@
       <h1>Grogu Wars</h1>
       <p class="intro">Help Grogu use the force against the TIE fighters</p>
     <div class="scoreboard-container">
-      <div class="scoreboard">Score: <span id="score-display">300</span></div>
-      <div class="scoreboard">Lives: <span id="lives-display"><img class="heart" src="./images/pixel-heart.png"></span></div>
+      <div class="scoreboard">Score: <span id="score-display">000</span></div>
+      <div class="scoreboard">Lives: <span id="lives-display"></span></div>
     </div>
         <div class="starfield">
       </div>
@@ -25,27 +25,29 @@
       </div>
       <aside class="side-container">
         <div class="instructions">
-        <h5>// INSTRUCTIONS</h5>
+        <h4>// INSTRUCTIONS</h4>
         <ul>
           <li>The TIE fighters are ascending on the planet Nevarro.</li>
           <li>The only way Grogu can stop them is by using the force.</li>
-          <li>Move Grogu left: &larr;.</li>
-          <li>Move Grogu right: &rarr;.</li>
+          <li>Move Grogu left: &larr;</li>
+          <li>Move Grogu right: &rarr;</li>
           <li>Shoot the force at the TIE fighters with the space bar.</li>
           <li>Destroy a TIE fighter to gain 10 points.</li>
-          <li>Destroy ALL the TIE fighters to win the game !</li>
+          <li>Destroy ALL the TIE fighters to win the game!</li>
           <li>If the TIE fighters make it to Nevarro, then you lose a life.</li>
           <li>If you lose 3 lives, it's GAMEOVER!</li>
         </ul>
       </div>
       <div class="play-container">
-        <h5>// PLAY THE GAME</h5>
+        <h4>// PLAY THE GAME</h4>
+        <p class="coin-to-play">Insert a coin to play</p>
       <div class="buttons">
         <button id="insert-coin" type="image"><img class="coin-img" src="./images/insert-coin.png" alt="Insert a coin to play"></button>
         <!-- <button class="coin">Insert coin</button> -->
         <button id="play-btn">Play</button>
         <button id="restart-btn">Restart</button>
       </div>
+      <p id="coin-display"> </p>
     </div>
       </aside>
   </body>
