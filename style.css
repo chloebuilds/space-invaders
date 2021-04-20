@@ -170,7 +170,7 @@ background-color: rgba(110, 108, 108, 0.9);
   background-position: center;
   background-repeat: no-repeat;
 }
-.dark-side {
+.laser {
   background-image: url(./images/darkside.png);
   background-size: contain;
   background-position: center;

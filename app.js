@@ -5,9 +5,9 @@ const elements = {
   scoreDisplay: document.querySelector('#score-display'),
   livesDisplay: document.querySelector('#lives-display'),
   coinDisplay: document.querySelector('#coin-display'),
+  starfield: document.querySelector('.starfield')
 }
 
-const starfield = document.querySelector('.starfield')
 const width = 10
 const cells = []
 
@@ -15,21 +15,21 @@ const cells = []
 let groguIndex = 94
 let tieFighter = 0
 let theForceIndex = 0
-let darkSideIndex = 12
 let intervalId = 0
 let lives = 0
+// TIE FIGHTER MOVEMENTS
 let direction = 1
 const interval = 800
-// TIE FIGHTER MOVEMENTS
 const numberOfTieFightersPerRow = 8
 let tieFightersIndices = [10, 11, 12, 13, 14, 15, 16, 17, 20, 21, 22, 23, 24, 25, 26, 27] //0, 1, 2, 3, 4, 5, 6, 7,
+
 
 // ADDING THE STARFIELD
 for (let cellIndex = 0; cellIndex < width ** 2; cellIndex++) {
   const div = document.createElement('div')
-  starfield.appendChild(div)
+  elements.starfield.appendChild(div)
   cells.push(div)
-  div.innerHTML = cellIndex
+  //div.innerHTML = cellIndex
   // div.style.width = `${100 / width}%`
   // div.style.height = `${100 / width}%`
 
@@ -82,7 +82,7 @@ elements.playBtn.addEventListener('click', () => {
   // elements.audioPlayer.src = './sounds/lightsaber-turn-on.wav' // ! change
   // elements.audioPlayer.play()
 
-  // ? adding the tie-fighter class to each index of tie-fighter array
+  // adding the tie-fighter class to each index of tie-fighter array
   tieFightersIndices.forEach((tieFighterIndex) => {
     cells[tieFighterIndex].classList.add('tie-fighter')
   })
@@ -141,27 +141,29 @@ elements.playBtn.addEventListener('click', () => {
         tieFighterIndex = tieFighterIndex - 1
         cells[tieFighterIndex].classList.add('tie-fighter')
       }
+      
     })
+
+    if (tieFightersIndices.some((tieFighterIndex) => tieFighterIndex  >= cells.length - width)) {
+      console.log('this is the end')
+      // Remove class from ALL cells with tiefighters at the end
+      
+      // stop the interval running
+      clearInterval(intervalId)
+      alert('Oh My Grogu! GAME OVER!')
+
+      // tieFightersIndices.forEach((tieFighterIndex, i) => { // ! Not sure I need this
+      //   if (i >= cells.length - width) {
+      //   cells[tieFighterIndex].classList.remove('tie-fighter')
+      //   }
+      //   })
+    }
   }, interval)
+  fireTieLaser()
 })
 
-// ? Interval movement of dark-side laser
-const intervalDark = setInterval(() => {
-  // console.log('hello')
 
-  //clearInterval(intervalDark);
 
-  cells[darkSideIndex].classList.remove('dark-side')
-  darkSideIndex = darkSideIndex + width
-  cells[darkSideIndex].classList.add('dark-side')
-  if (darkSideIndex > 90) {
-    console.log('button')
-    cells[darkSideIndex].classList.remove('dark-side')
-    clearInterval(intervalDark)
-  }
-  //elements.audioPlayer.src = "./sounds/tie-laser.mp3";
-  //elements.audioPlayer.play();
-}, 800)
 
 // INSERT COIN BUTTON
 elements.insertCoin.addEventListener('click', () => {
@@ -175,19 +177,15 @@ elements.insertCoin.addEventListener('click', () => {
   elements.audioPlayer.play()
   lives = 3
   livesDisplay()
-  //const livesAdded = setTimeout(, 20)
-  //livesAdded =
   elements.coinDisplay.innerHTML = '3 lives loaded. <br> May the force be with you!'
   // ! want the message to timeout OR I just want it to clear on press of play button
   return
 })
 
 // ? GAME FUNCTIONS
-// function tieFighterAttack() {
-// }
-// tieFighterAttack()
 
-// ? LIVES DISPLAY
+
+// LIVES DISPLAY
 // to populate dom with heart images, make function that loops as many times as there are lives and add img to dom for each life
 function livesDisplay() {
   for (let i = 0; i < lives; i++) {
@@ -198,48 +196,48 @@ function livesDisplay() {
   }
 }
 
+// RANDOM TIE LASER
 function fireTieLaser() {
-  return tieFightersIndices[Math.floor(Math.random() * tieFightersIndices.length)]
+let randomLaser = tieFightersIndices[Math.floor(Math.random() * tieFightersIndices.length)]
+
+  const laserInterval = setInterval(() => {
+    console.log('incoming laser')
+    // to randomly fire a tie laser
+    cells[randomLaser].classList.remove('laser')
+    randomLaser = randomLaser + width
+
+    cells[randomLaser].classList.add('laser')
+    
+    if (randomLaser > cells.length - width) {
+      console.log('button') 
+      cells[randomLaser].classList.remove('laser')
+      clearInterval(laserInterval)
+      return
+    }
+  }, 1000)
+
+  //return tieFightersIndices[Math.floor(Math.random() * tieFightersIndices.length)]
 }
-console.log(fireTieLaser())
+
+
+
+// ? Interval movement of laser
+// const laserInterval = setInterval(() => {
+//   
+
+//   cells[darkSideIndex].classList.remove('laser')
+//   laserIndex = darkSideIndex + width
+//   cells[darkSideIndex].classList.add('laser')
+//   if (darkSideIndex > cells.length) {
+//     console.log('button')
+//     cells[darkSideIndex].classList.remove('laser')
+//     clearInterval(laserInterval)
+//   }
+//   //elements.audioPlayer.src = "./sounds/tie-laser.mp3";
+//   //elements.audioPlayer.play();
+// }, 800)
 
 //COLLISION DETECTION
-
 //function collisionDetection() {}
 
-// if ((leftWall && direction === -1) || (rightWall && direction === 1)) {
 
-//   // ? Needs to move down one row and reverse direction
-//   // ? Removes the alien from current position
-//   for (let i = 0; i <= tieFightersIndices.length - 1; i++) {
-//     //cells[tieFightersIndices[i]].classList.remove("tie-fighter")
-//     console.log(cells[tieFightersIndices[i]])
-
-//     // ? Moves back or forward one index depending on direction
-//     for (let i = 0; i <= tieFightersIndices.length - 1; i++) {
-//       tieFightersIndices[i] += width
-//     }
-
-//     for (let i = 0; i <= tieFightersIndices.length - 1; i++) {
-//       cells[tieFightersIndices[i]].classList.add("tie-fighter")
-//     }
-//     // ? Performs check on current direction of travel and reverses it
-//     if (direction === 1) {
-//       direction = -1
-//     } else if (direction === -1) {
-//       direction = 1
-//     }
-//     // ? As above - removes alien from current position, moves back or forward one cell
-//     // ? and updates new position with alien
-//   }
-//   for (let i = 0; i <= tieFightersIndices.length - 1; i++) {
-//     console.log(cells[tieFightersIndices[i]])
-//     cells[tieFightersIndices[i]].classList.remove("tie-fighter")
-//   }
-//   for (let i = 0; i <= tieFightersIndices.length - 1; i++) {
-//     tieFightersIndices[i] += direction
-//   }
-//   for (let i = 0; i <= tieFightersIndices.length - 1; i++) {
-//     cells[tieFightersIndices[i]].classList.add("tie-fighter")
-//   }
-// }
