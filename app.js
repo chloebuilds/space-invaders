@@ -112,10 +112,16 @@ elements.playBtn.addEventListener('click', () => {
       }
       if (leftWall && direction === - 1) {
         // Move them all down if they hit the left wall
-        if (i > numberOfTieFightersPerRow) {
+        if (i < numberOfTieFightersPerRow) {
           cells[tieFighterIndex].classList.remove('tie-fighter')
         }
-        direction = 1
+        tieFightersIndices[i] = tieFighterIndex + width
+        tieFighterIndex = tieFighterIndex + width
+        cells[tieFighterIndex].classList.add('tie-fighter')
+        if (i === tieFightersIndices.length - 1) {
+          direction = 1
+        }
+        return
       }
       // Moving left to right
       if (direction === 1) {
