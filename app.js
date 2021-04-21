@@ -19,7 +19,7 @@ let intervalId = 0
 let lives = 0
 // TIE FIGHTER MOVEMENTS
 let direction = 1
-const interval = 800
+const interval = 400
 const numberOfTieFightersPerRow = 8
 let tieFightersIndices = [10, 11, 12, 13, 14, 15, 16, 17, 20, 21, 22, 23, 24, 25, 26, 27] //0, 1, 2, 3, 4, 5, 6, 7,
 
@@ -29,7 +29,7 @@ for (let cellIndex = 0; cellIndex < width ** 2; cellIndex++) {
   const div = document.createElement('div')
   elements.starfield.appendChild(div)
   cells.push(div)
-  //div.innerHTML = cellIndex
+  div.innerHTML = cellIndex
   // div.style.width = `${100 / width}%`
   // div.style.height = `${100 / width}%`
 
@@ -91,10 +91,12 @@ elements.playBtn.addEventListener('click', () => {
   
   // let tieFightersIndices = [10, 11, 12, 13, 14, 15, 16, 17, 20, 21, 22, 23, 24, 25, 26, 27] //0, 1, 2, 3, 4, 5, 6, 7,
   // index in the array:       0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15
-
+  let counter = 0
+  
   intervalId = setInterval(() => {
     const leftWall = tieFightersIndices[0] % width === 0
     const rightWall = tieFightersIndices[tieFightersIndices.length - 1] % width === width - 1
+    counter++
 
     tieFightersIndices.forEach((tieFighterIndex, i) => {
       if (rightWall && direction === 1) {
@@ -150,16 +152,14 @@ elements.playBtn.addEventListener('click', () => {
       
       // stop the interval running
       clearInterval(intervalId)
-      alert('Oh My Grogu! GAME OVER!')
-
-      // tieFightersIndices.forEach((tieFighterIndex, i) => { // ! Not sure I need this
-      //   if (i >= cells.length - width) {
-      //   cells[tieFighterIndex].classList.remove('tie-fighter')
-      //   }
-      //   })
+      //alert('Oh My Grogu! GAME OVER!')
+      gameLost()
     }
+    if (counter % 4 === 0) {
+      fireTieLaser()
+    }
+    
   }, interval)
-  fireTieLaser()
 })
 
 
@@ -196,6 +196,8 @@ function livesDisplay() {
   }
 }
 
+const laserArray = []
+
 // RANDOM TIE LASER
 function fireTieLaser() {
 let randomLaser = tieFightersIndices[Math.floor(Math.random() * tieFightersIndices.length)]
@@ -203,39 +205,46 @@ let randomLaser = tieFightersIndices[Math.floor(Math.random() * tieFightersIndic
   const laserInterval = setInterval(() => {
     console.log('incoming laser')
     // to randomly fire a tie laser
-    cells[randomLaser].classList.remove('laser')
-    randomLaser = randomLaser + width
-
-    cells[randomLaser].classList.add('laser')
     
     if (randomLaser > cells.length - width) {
       console.log('button') 
       cells[randomLaser].classList.remove('laser')
+      // FIND INDEX OF THIS LASER INTERVAL
+      // SPLICE AT THAT INDEX AND REMOVE 1
       clearInterval(laserInterval)
       return
     }
+    cells[randomLaser].classList.remove('laser')
+    randomLaser = randomLaser + width
+    cells[randomLaser].classList.add('laser')
   }, 1000)
-
+  laserArray.push(laserInterval)
   //return tieFightersIndices[Math.floor(Math.random() * tieFightersIndices.length)]
 }
 
+function gameWon() {
+  gameOver() 
+}
 
+function gameLost() {
+  gameOver()
+  elements.audioPlayer.src = './sounds/game-lost.wav'
+  elements.audioPlayer.play()
+}
 
-// ? Interval movement of laser
-// const laserInterval = setInterval(() => {
-//   
+function gameOver() {
+  laserArray.forEach(laserInterval => clearInterval(laserInterval))
+  tieFightersIndices.forEach(tieFighterIndex => cells[tieFighterIndex].classList.remove('tie-fighter')) 
+  console.log('Tie fighters removed')
+    
+}
 
-//   cells[darkSideIndex].classList.remove('laser')
-//   laserIndex = darkSideIndex + width
-//   cells[darkSideIndex].classList.add('laser')
-//   if (darkSideIndex > cells.length) {
-//     console.log('button')
-//     cells[darkSideIndex].classList.remove('laser')
-//     clearInterval(laserInterval)
-//   }
-//   //elements.audioPlayer.src = "./sounds/tie-laser.mp3";
-//   //elements.audioPlayer.play();
-// }, 800)
+// tieFightersIndices.forEach((tieFighterIndex, i) => { // ! Not sure I need this
+  //   if (i >= cells.length - width) {
+  //   cells[tieFighterIndex].classList.remove('tie-fighter')
+  //   }
+  //   })
+
 
 //COLLISION DETECTION
 //function collisionDetection() {}
