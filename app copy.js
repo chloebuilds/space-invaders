@@ -5,8 +5,7 @@ insertCoin: document.querySelector('#insert-coin'),
   scoreDisplay: document.querySelector('#score-display'),
   livesDisplay: document.querySelector('#lives-display'),
   coinDisplay: document.querySelector('#coin-display'),
-  starfield: document.querySelector('.starfield'),
-  closeBtns: document.querySelectorAll('.close-button')
+  starfield: document.querySelector('.starfield')
 }
 
 const width = 10
@@ -26,7 +25,7 @@ const interval = 900
 const intervalForceShooting = 200
 const intervalDarkShooting = 300
 const numberOfTieFightersPerRow = 8
-let tieFightersIndices = [10, 11, 12, 13, 14, 15, 16, 17, 20, 21, 22, 23, 24, 25, 26, 27] // 0, 1, 2, 3, 4, 5, 6, 7,
+let tieFightersIndices = [10, 11, 12, 13, 14, 15, 16, 17, 20, 21, 22, 23, 24, 25, 26, 27] //0, 1, 2, 3, 4, 5, 6, 7,
 
 
 // ADDING THE STARFIELD
@@ -73,22 +72,16 @@ document.addEventListener('keydown', (event) => {
       cells[theForceIndex].classList.add('the-force')
       if (cells[theForceIndex].classList.contains('tie-fighter')) {
         console.log('tie fighter destroyed')
-        elements.audioPlayer.src = "./sounds/explosion.wav";
-        elements.audioPlayer.play();
         cells[theForceIndex].classList.remove('tie-fighter')
         cells[theForceIndex].classList.remove('the-force')
         cells[theForceIndex].classList.add('explosion')
         tieFightersIndices = tieFightersIndices.filter(tieFighterIndex => tieFighterIndex !== theForceIndex)
-        if (tieFightersIndices.length === 0) {
-          gameWon()
-        }
         //tieFightersIndices.splice(hitTieFighter, null)
-        // to remove the explosion
         setTimeout(() => {
           cells[theForceIndex].classList.remove('explosion')
         }, 300);
         clearInterval(intervalForce)
-        elements.scoreDisplay.innerHTML = score += 10 
+        elements.scoreDisplay.innerHTML = score += 10 // ! not sure if right
         console.log('score updated')
         return 
       }
@@ -129,25 +122,60 @@ elements.playBtn.addEventListener('click', () => {
     counter++
     console.log(tieFightersIndices)
 
-    if ((rightWall && direction === 1) || leftWall && direction === - 1) {
-      tieFightersIndices.forEach(tieFighterIndex => cells[tieFighterIndex].classList.remove('tie-fighter'))
-      tieFightersIndices = tieFightersIndices.map(tieFighterIndex => tieFighterIndex + width)
-      tieFightersIndices.forEach(tieFighterIndex => cells[tieFighterIndex].classList.add('tie-fighter'))
-      if (direction === 1) {
-        direction = -1
-      } else {
-        direction = 1
-      }
-    } else {
-      tieFightersIndices.forEach(tieFighterIndex => cells[tieFighterIndex].classList.remove('tie-fighter'))
-      tieFightersIndices = tieFightersIndices.map(tieFighterIndex => tieFighterIndex + direction)
-      tieFightersIndices.forEach(tieFighterIndex => cells[tieFighterIndex].classList.add('tie-fighter'))
-    }
+    tieFightersIndices.forEach((tieFighterIndex, i) => {
+      if (rightWall && direction === 1) {
+        // Move all of them down if they hit the right wall
+        // if (i < numberOfTieFightersPerRow) {
+          cells[tieFighterIndex].classList.remove('tie-fighter')
+        // }
 
-    
+          tieFightersIndices[i] = tieFighterIndex + width
+          tieFighterIndex = tieFighterIndex + width
+          cells[tieFighterIndex].classList.add('tie-fighter')
+
+        if (i === tieFightersIndices.length - 1) {
+          direction = -1
+        }
+        return
+      }
+      if (leftWall && direction === - 1) {
+        // Move them all down if they hit the left wall
+        // if (i < numberOfTieFightersPerRow) {
+          cells[tieFighterIndex].classList.remove('tie-fighter')
+        // }
+
+        tieFightersIndices[i] = tieFighterIndex + width
+        tieFighterIndex = tieFighterIndex + width
+        cells[tieFighterIndex].classList.add('tie-fighter')
+        if (i === tieFightersIndices.length - 1) {
+          direction = 1
+        }
+        return
+      }
+      // Moving left to right
+      if (direction === 1) {
+        if (i % numberOfTieFightersPerRow === 0) {
+          cells[tieFighterIndex].classList.remove('tie-fighter')
+        }
+        tieFightersIndices[i] = tieFighterIndex + 1
+        tieFighterIndex = tieFighterIndex + 1
+        cells[tieFighterIndex].classList.add('tie-fighter')
+      }
+      // Moving right to left
+      if (direction === -1) {
+        if (i % numberOfTieFightersPerRow === numberOfTieFightersPerRow - 1) {
+          cells[tieFighterIndex].classList.remove('tie-fighter')
+        }
+        tieFightersIndices[i] = tieFighterIndex - 1
+        tieFighterIndex = tieFighterIndex - 1
+        cells[tieFighterIndex].classList.add('tie-fighter')
+      }
+      
+    })
     if (tieFightersIndices.some((tieFighterIndex) => tieFighterIndex  >= cells.length - width)) {
       console.log('this is the end')
-      // Remove class from ALL cells with tiefighters at the end 
+      // Remove class from ALL cells with tiefighters at the end
+      
       // stop the interval running
       clearInterval(intervalId)
       //alert('Oh My Grogu! GAME OVER!')
@@ -156,8 +184,10 @@ elements.playBtn.addEventListener('click', () => {
     if (counter % 4 === 0) {
       fireTieLaser()
     }
+    
   }, interval)
 })
+
 
 
 
@@ -176,19 +206,11 @@ elements.insertCoin.addEventListener('click', () => {
   elements.coinDisplay.innerHTML = '3 lives loaded. <br> May the force be with you!'
   return
 })
-// CLOSE BUTTON
-elements.closeBtns.forEach(button => button.addEventListener('click', (event) => {
-  const parentDiv = event.target.parentElement
-  parentDiv.classList.add('hidden')
-}))
-
-
 
 // ? GAME FUNCTIONS
 // LIVES DISPLAY
 // to populate dom with heart images, make function that loops as many times as there are lives and add img to dom for each life
 function livesDisplay() {
-  elements.livesDisplay.innerHTML = ''
   for (let i = 0; i < lives; i++) {
     const heart = document.createElement('img')
     heart.src = './images/pixel-heart.png'
@@ -197,13 +219,13 @@ function livesDisplay() {
   }
 }
 
-const laserArray = [] // ! not being used yet
+const laserArray = []
 // RANDOM TIE LASER
 function fireTieLaser() {
 let randomLaser = tieFightersIndices[Math.floor(Math.random() * tieFightersIndices.length)]
 
   const laserInterval = setInterval(() => {
-    console.log('incoming laser')s
+    console.log('incoming laser')
     // to randomly fire a tie laser
     
     if (randomLaser > cells.length - width) {
@@ -216,28 +238,19 @@ let randomLaser = tieFightersIndices[Math.floor(Math.random() * tieFightersIndic
     }
     cells[randomLaser].classList.remove('laser')
     randomLaser = randomLaser + width
-    // if cells at random laser has classList grogu then {apply explosion class, return after this and clear interval and lose a life}
+    // maybe here: if cells at random laser has classList grogu then {apply explosion class, return after this and clear interval and lose a life}
     if (cells[randomLaser].classList.contains('grogu')) {
-      elements.audioPlayer.src = "./sounds/grogu-hit.wav";
-      elements.audioPlayer.play()
-      // cells[groguIndex].classList.remove('grogu')
-      cells[groguIndex].classList.add('grogu-hit')
-      const currentIndex = groguIndex
-      setTimeout(() => {
-        cells[currentIndex].classList.remove('grogu-hit') //time out on grogu-hit class
-      }, 300);
-      lives = lives - 1
-      livesDisplay()
-      if (lives === 0) { 
-        gameLost()
-      }
+      console.log('grogu is hit')
+      cells[groguIndex].classList.remove('grogu')
+      cells[groguIndex].classList.add('explosion')
+      gameLost()
       return 
-      
+      // ! but it's not clearing the interval
     }
     cells[randomLaser].classList.add('laser')
   }, intervalDarkShooting)
-  elements.audioPlayer.src = "./sounds/tie-laser.mp3";
-  elements.audioPlayer.play()
+  // elements.audioPlayer.src = "./sounds/tie-laser.wav";
+  // elements.audioPlayer.play()
   laserArray.push(laserInterval)
   //return tieFightersIndices[Math.floor(Math.random() * tieFightersIndices.length)]
 }
@@ -275,8 +288,8 @@ function gameOver() {
 
 
 //COLLISION DETECTION
-// function collisionDetection() {
+function collisionDetection() {
 
-// }
+}
 
 

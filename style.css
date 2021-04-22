@@ -43,8 +43,11 @@ h4 {
 }
 .coin-to-play {
   font-family: 'Fira Code', monospace;
-  font-size: 14px;
+  font-size: 12px;
   margin-left: 20px;
+}
+.arrow {
+  font-size: 26px;
 }
 
 
@@ -79,10 +82,10 @@ h4 {
 }
 .instructions {
   font-family: 'Fira Code', monospace;
-  font-size: 14px;
+  font-size: 13px;
   background-color: rgba(0,0,0,.9);
   color: white;
-  padding: 30px;
+  padding: 25px;
   border-radius: 5px;
   margin: 10px;
   margin-top: 0;
@@ -93,7 +96,7 @@ h4 {
   font-size: 14px;
   background-color: rgba(0,0,0,.9);
   color: white;
-  padding: 30px;
+  padding: 25px;
   border-radius: 5px;
   margin: 10px;
   margin-top: 20px;;
@@ -124,6 +127,7 @@ line-height: 20px;
 background-color: rgba(110, 108, 108, 0.9);
 }
 .starfield {
+  position: relative;
   display: flex;
   flex-direction: row;
   width: 500px;
@@ -135,13 +139,31 @@ background-color: rgba(110, 108, 108, 0.9);
   box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
   border: 1px solid white;
 }
-.starfield div {
+.starfield div:not(.game-over) {
   width: 10%;
   height: 10%;
 }
 .buttons {
   display: flex;
   justify-content: center;
+}
+.game-over {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 10px auto;
+  font-family: 'Press Start 2P', courier, monospace;
+  font-size: 18px;
+  text-align: center;
+  line-height: 30px;
+  border: 1px solid white;
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
+  width: 500px;
+  height: 500px;
+}
+.hidden {
+  display: none;
 }
 
 /* Images */
@@ -172,6 +194,18 @@ background-color: rgba(110, 108, 108, 0.9);
 }
 .laser {
   background-image: url(./images/darkside.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.explosion {
+  background-image: url(./images/explosion1.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.grogu-hit {
+  background-image: url(./images/grogu-hit.png);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
