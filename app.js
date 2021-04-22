@@ -1,6 +1,7 @@
 const elements = {
 insertCoin: document.querySelector('#insert-coin'),
   playBtn: document.querySelector('#play-btn'),
+  restartBtn: document.querySelector('#restart-btn'),
   audioPlayer: document.querySelector('audio'),
   scoreDisplay: document.querySelector('#score-display'),
   livesDisplay: document.querySelector('#lives-display'),
@@ -100,7 +101,10 @@ document.addEventListener('keydown', (event) => {
 
 // BUTTON FUNCTIONS
 // RESTART BUTTON
-// clear everything, reassign lives to 0, clear the board
+elements.restartBtn.addEventListener('click', () => {
+  resetGame()
+})
+
 
 
 // PLAY BUTTON
@@ -115,9 +119,9 @@ if (lives !== 3) {
   elements.audioPlayer.play()
   return
 }
-if (!Array.from(document.querySelectorAll('div.game-over')).every(div => div.classList.contains('hidden')) {
+if (!Array.from(document.querySelectorAll('div.game-over')).every(div => div.classList.contains('hidden'))) {
   return
-}
+  }
   elements.coinDisplay.innerHTML = ' '
   elements.audioPlayer.src = './sounds/lightsaber-turn-on.wav'
   elements.audioPlayer.volume = 0.30
@@ -174,7 +178,7 @@ elements.insertCoin.addEventListener('click', () => {
     return
   }
   elements.audioPlayer.src = './sounds/penny-drop2.wav'
-  elements.audioPlayer.volume = 0.50
+  elements.audioPlayer.volume = 0.30
   elements.audioPlayer.play()
 
 
@@ -222,7 +226,7 @@ let randomLaser = tieFightersIndices[Math.floor(Math.random() * tieFightersIndic
     // if cells at random laser has classList grogu then {apply explosion class, return after this and clear interval and lose a life}
     if (cells[randomLaser].classList.contains('grogu')) {
       elements.audioPlayer.src = './sounds/grogu-hit.wav'
-      elements.audioPlayer.volume = 0.70
+      elements.audioPlayer.volume = 0.50
       elements.audioPlayer.play()
       // cells[groguIndex].classList.remove('grogu')
       cells[groguIndex].classList.add('grogu-hit')
@@ -249,23 +253,24 @@ let randomLaser = tieFightersIndices[Math.floor(Math.random() * tieFightersIndic
 function gameWon() {
   gameOver() 
   document.getElementById('game-won').classList.remove('hidden')
-  document.getElementById('final-score-won').innerHTML = 'Your score is ${score}`'
+  document.getElementById('final-score-won').innerHTML = `Your final score is ${score}`
   elements.audioPlayer.src = './sounds/game-won.wav'
+  elements.audioPlayer.volume = 0.30
   elements.audioPlayer.play()
 }
 
 function gameLost() {
   gameOver()
   document.getElementById('game-lost').classList.remove('hidden')
-  document.getElementById('final-score-won').innerHTML = 'Your score is ${score}`'
+  document.getElementById('final-score-lost').innerHTML = `Your final score is ${score}`
   elements.audioPlayer.src = './sounds/game-lost.wav'
+  elements.audioPlayer.volume = 0.30
   elements.audioPlayer.play()
 }
 
 function gameOver() {
   laserArray.forEach(laserInterval => clearInterval(laserInterval))
   cells[groguIndex].classList.remove('grogu')
-  cells[groguIndex].classList.remove('explosion')
   cells[groguIndex].classList.remove('grogu-hit')
   clearInterval(intervalId)
   // Remove all tie fighters from starfield
@@ -276,5 +281,7 @@ function gameOver() {
   tieFightersIndices = [0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 16, 17] // 20, 21, 22, 23, 24, 25, 26, 27
   direction = 1
 }
-
+function resetGame() {
+  location.reload()
+}
 

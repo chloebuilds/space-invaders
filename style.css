@@ -51,6 +51,10 @@ h4 {
 .arrow {
   font-size: 26px;
 }
+.final-score {
+  font-family: 'Fira Code', monospace;
+  font-size: 16px;
+}
 
 
 /* Layout */
@@ -74,7 +78,7 @@ h4 {
   background: linear-gradient(45deg, rgb(252, 164, 164), rgb(248, 192, 174));
   border-radius: 5px;
 }
-.scoreboard { /* NOT ALIGNING TO BOTTOM - WHY?*/
+.scoreboard { 
   display: flex;
   flex-direction: row;
 }
@@ -88,7 +92,7 @@ h4 {
   font-size: 13px;
   background-color: rgba(0,0,0,.9);
   color: white;
-  padding: 25px;
+  padding: 20px;
   border-radius: 5px;
   margin: 10px;
   margin-top: 0;
@@ -99,10 +103,10 @@ h4 {
   font-size: 14px;
   background-color: rgba(0,0,0,.9);
   color: white;
-  padding: 25px;
+  padding: 20px;
   border-radius: 5px;
   margin: 10px;
-  margin-top: 20px;
+  
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -121,7 +125,7 @@ h4 {
 #coin-display {
 width: 100%;
 text-align: center;
-margin: 0 auto;
+margin: 20 auto;
 font-size: 10px;
 font-family: 'Press Start 2P', courier, monospace;
 line-height: 20px;
@@ -218,7 +222,7 @@ background-color: rgba(110, 108, 108, 0.9);
 
 /* Buttons */
 button {
-  padding: 10px;
+  padding: 8px;
   margin: 5px;
   background: rgb(233, 113, 113);
   border: 1px solid white;
