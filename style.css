@@ -10,6 +10,7 @@ body {
   align-items: start;
   flex-direction: row;
   margin: 100px auto;
+  padding-bottom: 6rem;
   font-family: 'Press Start 2P', cursive;
   color: white;
   background: url(./images/sunsetmando.jpg);
@@ -36,6 +37,7 @@ h4 {
 .intro {
   font-family: 'Press Start 2P', courier, monospace;
   font-size: 10px;
+  margin-bottom: 35px;
 }
 .instructions li {
   list-style: square;
@@ -43,7 +45,7 @@ h4 {
 }
 .coin-to-play {
   font-family: 'Fira Code', monospace;
-  font-size: 12px;
+  font-size: 13px;
   margin-left: 20px;
 }
 .arrow {
@@ -66,6 +68,7 @@ h4 {
   justify-content: flex-end;
   margin: 20px auto;
   font-size: 12px;
+  padding: 5px;
   color: #EFEFEF;
   width: 500px;
   background: linear-gradient(45deg, rgb(252, 164, 164), rgb(248, 192, 174));
@@ -99,7 +102,7 @@ h4 {
   padding: 25px;
   border-radius: 5px;
   margin: 10px;
-  margin-top: 20px;;
+  margin-top: 20px;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -118,9 +121,7 @@ h4 {
 #coin-display {
 width: 100%;
 text-align: center;
-margin-left: auto;
-margin-right: auto;
-margin-bottom: 0;
+margin: 0 auto;
 font-size: 10px;
 font-family: 'Press Start 2P', courier, monospace;
 line-height: 20px;

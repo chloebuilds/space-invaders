@@ -14,32 +14,28 @@
   <body>
     <div class="main">
       <h1>Grogu Wars</h1>
-      <p class="intro">Help Grogu use the force against the TIE fighters</p>
+      <p class="intro">Grogu must use the force against the TIE fighters</p>
       <div class="scoreboard-container">
         <div class="scoreboard">Score: <span id="score-display">000</span></div>
-        <div class="scoreboard">Lives: <span id="lives-display"></span></div>
+        <div class="scoreboard">Lives: <span id="lives-display">[insert coin]</span></div>
       </div>
       <div class="starfield">
       <div id="game-lost" class="game-over hidden">
         <p>
-          Uh oh! <br />
-          The TIE Fighters won. <br />
+          Uh oh! <br>
+          The TIE Fighters won. <br>
           But don't worry, Grogu escaped safely..
         </p>
-        <img
-          src="https://media.giphy.com/media/9muH0HuaJ7r83RNmDt/giphy.gif"
-          width="480"
-          height="270"
-        ></img>
+        <img src="https://media.giphy.com/media/9muH0HuaJ7r83RNmDt/giphy.gif" width="480" height="270"></img>
+        <p class="final-score-lost"></p>
         <button id="lost-button" class="close-button">Close</button>
       </div>
       <div id="game-won" class="game-over hidden">
-        <p>YES, GO GROGU! <br />You beat the TIE Fighters!</p>
-        <img
-        src="https://media.giphy.com/media/AcfTF7tyikWyroP0x7/giphy.gif"
-        width="480"
-        height="270"
-        ></img>
+        <p>
+          YES, GO GROGU! <br>You beat the TIE Fighters!
+        </p>
+        <img src="https://media.giphy.com/media/AcfTF7tyikWyroP0x7/giphy.gif" width="480" height="270"></img>
+        <p class="final-score-won"></p>
         <button id="won-button" class="close-button">Close</button>
       </div>
     </div>
