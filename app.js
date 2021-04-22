@@ -78,6 +78,7 @@ document.addEventListener('keydown', (event) => {
         cells[theForceIndex].classList.remove('the-force')
         cells[theForceIndex].classList.add('explosion')
         tieFightersIndices = tieFightersIndices.filter(tieFighterIndex => tieFighterIndex !== theForceIndex)
+        elements.scoreDisplay.innerHTML = score += 10
         if (tieFightersIndices.length === 0) {
           elements.scoreDisplay.innerHTML = score += 100
           gameWon()
@@ -87,7 +88,6 @@ document.addEventListener('keydown', (event) => {
           cells[theForceIndex].classList.remove('explosion')
         }, 300);
         clearInterval(intervalForce)
-        elements.scoreDisplay.innerHTML = score += 10 
         return 
       }
     }, intervalForceShooting)
@@ -104,8 +104,6 @@ document.addEventListener('keydown', (event) => {
 elements.restartBtn.addEventListener('click', () => {
   resetGame()
 })
-
-
 
 // PLAY BUTTON
 elements.playBtn.addEventListener('click', () => {
@@ -278,7 +276,7 @@ function gameOver() {
   // Reset positions
   groguIndex = 94
   intervalId = 0
-  tieFightersIndices = [0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 16, 17] // 20, 21, 22, 23, 24, 25, 26, 27
+  tieFightersIndices = [0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 16, 17, 20, 21, 22, 23, 24, 25, 26, 27]
   direction = 1
 }
 function resetGame() {
