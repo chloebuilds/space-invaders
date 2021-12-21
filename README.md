@@ -50,5 +50,6 @@ for (let cellIndex = 0; cellIndex < width ** 2; cellIndex++) {
 } 
 ```
 The grid is visually demonstrated here with a white border:
-<img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/57c84f65-9793-4c49-a1e2-049a47f0b512/Untitled.png" width="200" height="100">()
+
+<img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/57c84f65-9793-4c49-a1e2-049a47f0b512/Untitled.png" width="200" height="100">
 
