@@ -1,4 +1,4 @@
-# Project 1: Space Invaders
+# Project 1: Grogu Wars: A Space Invaders Game
 
 ## Overview
 
