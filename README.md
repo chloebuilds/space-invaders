@@ -10,7 +10,6 @@ I wanted it to have an old-school 8-bit arcade game vibe to it with pixel art an
 
 [Play here! 👾](url 'https://chloebuilds.github.io/space-invaders/')
 
-## Table of Contents
 
 ## The Brief
 
