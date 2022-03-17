@@ -214,7 +214,7 @@ The TIE Fighters when hitting the walls needed to shift down a row on the grid. 
 ## Learning
 It is very easy for me to say that this project challenged me a lot but also gave me such a huge sense of achievement on completion. Starting from a blank canvas and watching it shape up to the final product confirmed why I made the choice to do the Software Engineering Immersive – it felt amazing to see the end product of all the hours, challenges and wins that I had over the week!
 
-I also learned how important is is to plan and structure your code. I tried to keep it clean and dry and refactored where I could. However, there are many lines and I am sure that there is much space for me to go back and refactor. And finally, I learned the importance of having clear, semantic and defined variable, function and element names. 
+I also learned how important it is to plan and structure your code. I tried to keep it clean and dry and refactored where I could. However, there are many lines and I am sure that there is much space for me to go back and refactor. And finally, I learned the importance of having clear, semantic and defined variable, function and element names. 
 
 ## Ideas for future developments
 * Currently, upon winning level 1, the second round adds an extra layer of TIE Fighters. I would like to add further levels of difficulty to the game by increasing the interval and speed at which the TIE Fighters move, the frequency of lasers fired by them and adding more rows of TIE Fighters. 
