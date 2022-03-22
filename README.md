@@ -79,7 +79,7 @@ insertCoin: document.querySelector('#insert-coin'),
 * I added sounds effects of a coin dropping and for the lives loading for added feedback to the user.
 
 
-IMAGE FOR INSERT COIN here
+IMAGE FOR INSERT COIN 
 
 ## Play Button
 The play button executes a function with a 'click' eventListener that triggers the appending of Grogu and the TIE Fighters and the many movement functions in the game. 
@@ -223,5 +223,6 @@ I also learned how important it is to plan and structure your code. I tried to k
 ### Credits
 * [Giphy.com](http://www.giphy.com) for the Grogu gifs of game over
 * [Mixkit](https://mixkit.co/free-sound-effects) for the audio files
+* [ShyFonts](http://www.shyfonts.com) for the Star Wars font
 
 
