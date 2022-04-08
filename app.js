@@ -26,7 +26,7 @@ const interval = 1000
 const intervalForceShooting = 200
 const intervalDarkShooting = 300
 const numberOfTieFightersPerRow = 8
-let tieFightersIndices = [0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 16, 17] //20, 21, 22, 23, 24, 25, 26, 27
+let tieFightersIndices = [0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 16, 17, 20, 21, 22, 23, 24, 25, 26, 27]
 
 
 // ADDING THE STARFIELD
@@ -34,8 +34,6 @@ for (let cellIndex = 0; cellIndex < width ** 2; cellIndex++) {
   const div = document.createElement('div')
   elements.starfield.appendChild(div)
   cells.push(div)
-  // div.style.width = `${100 / width}%`
-  // div.style.height = `${100 / width}%`
 }
 
 // GROGU MOVEMENTS
@@ -44,13 +42,14 @@ document.addEventListener('keydown', (event) => {
 
   if (key === 'ArrowLeft' && groguIndex !== 90) {
     cells[groguIndex].classList.remove('grogu')
-    groguIndex -= 1
+    groguIndex -= 1 // move grogu's position by removing 1
     cells[groguIndex].classList.add('grogu')
   } else if (key === 'ArrowRight' && groguIndex !== width ** 2 - 1) {
     cells[groguIndex].classList.remove('grogu')
-    groguIndex += 1
+    groguIndex += 1 // move grogu's position by adding 1
     cells[groguIndex].classList.add('grogu')
   }
+  
   // SHOOTING
   else if (key === ' ') {
     event.preventDefault()
@@ -99,7 +98,6 @@ document.addEventListener('keydown', (event) => {
   }
 })
 
-// BUTTON FUNCTIONS
 // RESTART BUTTON
 elements.restartBtn.addEventListener('click', () => {
   resetGame()
@@ -195,7 +193,7 @@ elements.closeBtns.forEach(button => button.addEventListener('click', (event) =>
 
 // ? GAME FUNCTIONS
 // LIVES DISPLAY
-// to populate dom with heart images, make function that loops as many times as there are lives and add img to dom for each life
+// populate dom with heart images, function that loops as many times as there are lives and add img to dom for each life
 function livesDisplay() {
   elements.livesDisplay.innerHTML = ''
   for (let i = 0; i < lives; i++) {
@@ -215,13 +213,13 @@ let randomLaser = tieFightersIndices[Math.floor(Math.random() * tieFightersIndic
 
     // to randomly fire a tie laser
     if (randomLaser > cells.length - width) {
-      cells[randomLaser].classList.remove('laser') // ! error with this in console
+      cells[randomLaser].classList.remove('laser')
       clearInterval(laserInterval)
       return
     }
     cells[randomLaser].classList.remove('laser')
     randomLaser = randomLaser + width
-    // if cells at random laser has classList grogu then {apply explosion class, return after this and clear interval and lose a life}
+    // if cells at random laser has classList grogu then apply explosion class, return after this and clear interval and lose a life
     if (cells[randomLaser].classList.contains('grogu')) {
       elements.audioPlayer.src = './sounds/grogu-hit.wav'
       elements.audioPlayer.volume = 0.50
